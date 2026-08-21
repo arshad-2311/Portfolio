@@ -30,7 +30,7 @@ export const AIApplied: React.FC = () => {
   ];
 
   return (
-    <section className="py-20 md:py-28 px-6 sm:px-8 border-b border-white/[0.08] bg-[#0A0A0A]">
+    <section className="py-20 md:py-28 px-4 sm:px-8 border-b border-white/[0.08] bg-[#0A0A0A]">
       <div className="max-w-7xl mx-auto space-y-12">
         
         {/* Header */}
@@ -56,12 +56,12 @@ export const AIApplied: React.FC = () => {
             return (
               <div
                 key={item.domain}
-                className="p-6 rounded border border-white/[0.08] bg-[#0E0E0E] flex flex-col justify-between space-y-6 hover:border-white/20 transition-all"
+                className="p-5 sm:p-6 rounded border border-white/[0.08] bg-[#0E0E0E] flex flex-col justify-between space-y-6 hover:border-white/20 transition-all"
               >
                 <div className="space-y-4">
                   <div className="flex items-center justify-between pb-3 border-b border-white/[0.06]">
                     <div className="flex items-center gap-2">
-                      <Icon className="w-4 h-4 text-[#3B82F6]" />
+                      <Icon className="w-4 h-4 text-[#3B82F6] flex-shrink-0" />
                       <span className="mono-label text-xs text-white">
                         {item.domain}
                       </span>
@@ -85,7 +85,7 @@ export const AIApplied: React.FC = () => {
                   <div className="text-[10px] text-[#71717A] uppercase">
                     DATA FLOW PIPELINE
                   </div>
-                  <div className="text-[11px] text-[#3B82F6] bg-[#141414] p-2.5 rounded border border-white/[0.04] leading-relaxed">
+                  <div className="text-[10px] sm:text-[11px] text-[#3B82F6] bg-[#141414] p-2.5 rounded border border-white/[0.04] leading-relaxed break-words">
                     {item.systemFlow}
                   </div>
                 </div>

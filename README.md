@@ -12,6 +12,7 @@ Built with editorial minimalism, technical precision, and interactive system arc
 - **Styling**: Tailwind CSS + Custom Design Tokens (Monochrome `#0A0A0A` base with electric cobalt highlights)
 - **Visuals & Motion**: HTML5 Canvas Data-Trace Engine + Framer Motion
 - **Icons**: Lucide React + Custom SVG Icons
+- **Documentation**: Detailed component architecture and customization guide available in [`docs/COMPONENTS.md`](docs/COMPONENTS.md).
 
 ---
 

@@ -23,16 +23,16 @@ export const AttendanceShowcase: React.FC<AttendanceShowcaseProps> = ({
   ];
 
   return (
-    <div id="project-attendance" className="border border-white/[0.08] bg-[#0E0E0E] rounded-lg p-6 sm:p-8 transition-all hover:border-white/20">
+    <div id="project-attendance" className="border border-white/[0.08] bg-[#0E0E0E] rounded-lg p-5 sm:p-8 transition-all hover:border-white/20">
       
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
         <div className="flex items-center gap-3">
-          <span className="text-3xl sm:text-4xl font-mono font-bold text-[#A1A1AA]">
+          <span className="text-3xl sm:text-4xl font-mono font-bold text-[#A1A1AA] flex-shrink-0">
             03
           </span>
           <div>
-            <div className="mono-label text-[11px] text-[#3B82F6]">
+            <div className="mono-label text-[10px] sm:text-[11px] text-[#3B82F6]">
               {project.category} // DLIB + FASTAPI + MYSQL
             </div>
             <h3 className="text-xl sm:text-2xl font-semibold text-[#F5F5F5] tracking-tight">
@@ -41,7 +41,7 @@ export const AttendanceShowcase: React.FC<AttendanceShowcaseProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           {project.liveUrl && (
             <a
               href={project.liveUrl}
@@ -89,7 +89,7 @@ export const AttendanceShowcase: React.FC<AttendanceShowcaseProps> = ({
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-0.5 rounded bg-[#141414] text-[#A1A1AA] text-[11px] font-mono border border-white/[0.06]"
+                className="px-2 py-0.5 rounded bg-[#141414] text-[#A1A1AA] text-[10px] sm:text-[11px] font-mono border border-white/[0.06]"
               >
                 {tag}
               </span>
@@ -98,12 +98,12 @@ export const AttendanceShowcase: React.FC<AttendanceShowcaseProps> = ({
         </div>
 
         {/* Interactive Biometric Vector Flow & Role Viewer */}
-        <div className="lg:col-span-6 border border-white/[0.08] bg-[#0A0A0A] rounded p-4 space-y-4">
-          <div className="flex items-center justify-between border-b border-white/[0.06] pb-2 text-xs font-mono">
-            <div className="flex gap-2">
+        <div className="lg:col-span-6 border border-white/[0.08] bg-[#0A0A0A] rounded p-3.5 sm:p-4 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/[0.06] pb-2 text-xs font-mono">
+            <div className="flex flex-wrap gap-1.5">
               <button
                 onClick={() => setActiveRole('PROFESSOR')}
-                className={`px-2.5 py-1 rounded transition-colors flex items-center gap-1.5 ${
+                className={`px-2.5 py-1 rounded text-[11px] transition-colors flex items-center gap-1.5 ${
                   activeRole === 'PROFESSOR' ? 'bg-[#1F1F1F] text-white' : 'text-[#71717A] hover:text-white'
                 }`}
               >
@@ -112,7 +112,7 @@ export const AttendanceShowcase: React.FC<AttendanceShowcaseProps> = ({
               </button>
               <button
                 onClick={() => setActiveRole('ADMIN')}
-                className={`px-2.5 py-1 rounded transition-colors flex items-center gap-1.5 ${
+                className={`px-2.5 py-1 rounded text-[11px] transition-colors flex items-center gap-1.5 ${
                   activeRole === 'ADMIN' ? 'bg-[#1F1F1F] text-white' : 'text-[#71717A] hover:text-white'
                 }`}
               >
@@ -121,7 +121,7 @@ export const AttendanceShowcase: React.FC<AttendanceShowcaseProps> = ({
               </button>
               <button
                 onClick={() => setActiveRole('STUDENT')}
-                className={`px-2.5 py-1 rounded transition-colors flex items-center gap-1.5 ${
+                className={`px-2.5 py-1 rounded text-[11px] transition-colors flex items-center gap-1.5 ${
                   activeRole === 'STUDENT' ? 'bg-[#1F1F1F] text-white' : 'text-[#71717A] hover:text-white'
                 }`}
               >
@@ -129,12 +129,12 @@ export const AttendanceShowcase: React.FC<AttendanceShowcaseProps> = ({
                 <span>Student View</span>
               </button>
             </div>
-            <span className="text-[10px] text-[#52525B]">[SANDBOX]</span>
+            <span className="text-[9px] sm:text-[10px] text-[#52525B]">[SANDBOX]</span>
           </div>
 
           {activeRole === 'PROFESSOR' && (
             <div className="space-y-3 font-mono text-xs">
-              <div className="flex items-center justify-between text-[11px] text-[#71717A]">
+              <div className="flex flex-wrap items-center justify-between gap-1 text-[10px] sm:text-[11px] text-[#71717A]">
                 <span>EUCLIDEAN DISTANCE THRESHOLD: &lt; 0.60</span>
                 <span className="text-[#3B82F6]">CURRENT: {matchTolerance.toFixed(2)}</span>
               </div>
@@ -158,16 +158,16 @@ export const AttendanceShowcase: React.FC<AttendanceShowcaseProps> = ({
                   return (
                     <div
                       key={st.id}
-                      className="p-2 bg-[#111111] rounded border border-white/[0.04] flex items-center justify-between text-[11px]"
+                      className="p-2 bg-[#111111] rounded border border-white/[0.04] flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-2 text-[10px] sm:text-[11px]"
                     >
                       <div className="flex items-center gap-2">
                         <span className="text-white font-medium">{st.name}</span>
-                        <span className="text-[10px] text-[#52525B]">({st.rollNo})</span>
+                        <span className="text-[9px] sm:text-[10px] text-[#52525B]">({st.rollNo})</span>
                       </div>
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-between sm:justify-end gap-2.5">
                         <span className="text-[#71717A]">dist: {st.dist.toFixed(2)}</span>
                         <span
-                          className={`text-[10px] px-1.5 py-0.5 rounded font-semibold ${
+                          className={`text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded font-semibold ${
                             isPresent ? 'bg-[#10B981]/10 text-[#10B981]' : 'bg-[#F43F5E]/10 text-[#F43F5E]'
                           }`}
                         >
@@ -187,7 +187,7 @@ export const AttendanceShowcase: React.FC<AttendanceShowcaseProps> = ({
                 <Shield className="w-3.5 h-3.5 text-[#3B82F6]" />
                 <span>Department & Batch CSV Enrollment</span>
               </div>
-              <div className="text-[11px] text-[#71717A] leading-relaxed">
+              <div className="text-[10px] sm:text-[11px] text-[#71717A] leading-relaxed">
                 Admin extracts single-face portraits from batch zip uploads, generates 128-d floating point arrays using dlib, and seeds MySQL <code className="text-[#D4D4D8]">attendance_db</code>.
               </div>
             </div>

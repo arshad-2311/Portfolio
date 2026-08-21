@@ -25,24 +25,27 @@ export const HeroSystemVisual: React.FC = () => {
 
     let animationFrameId: number;
     let width = (canvas.width = canvas.parentElement?.clientWidth || 600);
-    let height = (canvas.height = canvas.parentElement?.clientHeight || 420);
+    let height = (canvas.height = canvas.parentElement?.clientHeight || 340);
 
     const handleResize = () => {
       if (!canvas || !canvas.parentElement) return;
       width = canvas.width = canvas.parentElement.clientWidth;
-      height = canvas.height = canvas.parentElement.clientHeight;
+      height = canvas.height = canvas.parentElement.clientHeight || 340;
     };
 
     window.addEventListener('resize', handleResize);
 
-    // System nodes mapped in a clean, balanced architecture
-    const nodes: Node[] = [
-      { x: 0.15, y: 0.5, label: 'CLIENT', type: 'client' },
-      { x: 0.4, y: 0.5, label: 'API GATEWAY', type: 'gateway' },
-      { x: 0.65, y: 0.28, label: 'ASYNC WORKER', type: 'service' },
-      { x: 0.65, y: 0.72, label: 'DATABASE POOL', type: 'db' },
-      { x: 0.88, y: 0.5, label: 'AI MODEL / VISION', type: 'model' },
-    ];
+    // Dynamic nodes based on available width
+    const getNodes = (w: number): Node[] => {
+      const isMobile = w < 460;
+      return [
+        { x: 0.12, y: 0.5, label: isMobile ? 'CLIENT' : 'CLIENT', type: 'client' },
+        { x: 0.38, y: 0.5, label: isMobile ? 'GATEWAY' : 'API GATEWAY', type: 'gateway' },
+        { x: 0.65, y: 0.28, label: isMobile ? 'WORKER' : 'ASYNC WORKER', type: 'service' },
+        { x: 0.65, y: 0.72, label: isMobile ? 'DB POOL' : 'DATABASE POOL', type: 'db' },
+        { x: 0.88, y: 0.5, label: isMobile ? 'AI / VISION' : 'AI MODEL / VISION', type: 'model' },
+      ];
+    };
 
     // Node connections
     const links = [
@@ -66,6 +69,11 @@ export const HeroSystemVisual: React.FC = () => {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
+      const nodes = getNodes(width);
+      const isMobile = width < 460;
+      const boxW = isMobile ? Math.max(58, Math.min(80, width * 0.20)) : 100;
+      const boxH = isMobile ? 24 : 32;
+
       // 1. Draw connecting traces (subtle circuit lines)
       ctx.lineWidth = 1;
       links.forEach(({ from, to }) => {
@@ -78,7 +86,6 @@ export const HeroSystemVisual: React.FC = () => {
 
         ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
         ctx.beginPath();
-        // Draw segmented line
         const midX = (x1 + x2) / 2;
         ctx.moveTo(x1, y1);
         ctx.lineTo(midX, y1);
@@ -126,8 +133,6 @@ export const HeroSystemVisual: React.FC = () => {
       nodes.forEach((n) => {
         const nx = n.x * width;
         const ny = n.y * height;
-        const boxW = 100;
-        const boxH = 34;
 
         // Box background & border
         ctx.fillStyle = '#111111';
@@ -139,14 +144,14 @@ export const HeroSystemVisual: React.FC = () => {
         // Status indicator dot
         ctx.fillStyle = '#10B981';
         ctx.beginPath();
-        ctx.arc(nx - boxW / 2 + 10, ny, 2.5, 0, Math.PI * 2);
+        ctx.arc(nx - boxW / 2 + (isMobile ? 6 : 9), ny, isMobile ? 1.8 : 2.2, 0, Math.PI * 2);
         ctx.fill();
 
         // Node label
         ctx.fillStyle = '#D4D4D8';
-        ctx.font = '9px "JetBrains Mono", monospace';
+        ctx.font = isMobile ? '7.5px "JetBrains Mono", monospace' : '9px "JetBrains Mono", monospace';
         ctx.textAlign = 'left';
-        ctx.fillText(n.label, nx - boxW / 2 + 18, ny + 3);
+        ctx.fillText(n.label, nx - boxW / 2 + (isMobile ? 12 : 16), ny + (isMobile ? 2.5 : 3));
       });
 
       animationFrameId = requestAnimationFrame(render);
@@ -161,23 +166,23 @@ export const HeroSystemVisual: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-full min-h-[340px] md:min-h-[400px] border border-white/[0.08] bg-[#0E0E0E] rounded-md overflow-hidden flex flex-col justify-between p-4">
+    <div className="relative w-full h-full min-h-[300px] sm:min-h-[340px] md:min-h-[380px] border border-white/[0.08] bg-[#0E0E0E] rounded-md overflow-hidden flex flex-col justify-between p-3.5 sm:p-4">
       {/* Visual Header */}
-      <div className="flex items-center justify-between text-[11px] font-mono text-[#71717A] border-b border-white/[0.06] pb-3">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#3B82F6]" />
-          <span className="text-[#A1A1AA]">SYSTEM ARCHITECTURE // LIVE DATA TRACE</span>
+      <div className="flex flex-wrap items-center justify-between gap-1.5 text-[10px] sm:text-[11px] font-mono text-[#71717A] border-b border-white/[0.06] pb-2.5">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#3B82F6]" />
+          <span className="text-[#A1A1AA] truncate">ARCHITECTURE // LIVE TRACE</span>
         </div>
-        <div className="text-[10px] text-[#52525B]">TOPOLOGY: DISTRIBUTED</div>
+        <div className="text-[9px] sm:text-[10px] text-[#52525B]">TOPOLOGY: DISTRIBUTED</div>
       </div>
 
       {/* Main Interactive Canvas */}
-      <div className="relative flex-1 w-full my-2">
+      <div className="relative flex-1 w-full my-2 min-h-[200px]">
         <canvas ref={canvasRef} className="w-full h-full block" />
       </div>
 
       {/* Visual Footer */}
-      <div className="flex items-center justify-between text-[10px] font-mono text-[#52525B] border-t border-white/[0.06] pt-2.5">
+      <div className="flex items-center justify-between text-[9px] sm:text-[10px] font-mono text-[#52525B] border-t border-white/[0.06] pt-2">
         <div>LATENCY: &lt;14ms</div>
         <div>PROTO: HTTP/2 · WS · TCP</div>
       </div>

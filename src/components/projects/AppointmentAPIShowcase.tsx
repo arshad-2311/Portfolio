@@ -41,16 +41,16 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
   const currentEp = API_EXPLORER_ENDPOINTS[selectedEndpointIndex];
 
   return (
-    <div id="project-appointment-api" className="border border-white/[0.08] bg-[#0E0E0E] rounded-lg p-6 sm:p-8 transition-all hover:border-white/20">
+    <div id="project-appointment-api" className="border border-white/[0.08] bg-[#0E0E0E] rounded-lg p-5 sm:p-8 transition-all hover:border-white/20">
       
       {/* Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-white/[0.08]">
         <div className="flex items-center gap-3">
-          <span className="text-3xl sm:text-4xl font-mono font-bold text-[#A1A1AA]">
+          <span className="text-3xl sm:text-4xl font-mono font-bold text-[#A1A1AA] flex-shrink-0">
             05
           </span>
           <div>
-            <div className="mono-label text-[11px] text-[#3B82F6]">
+            <div className="mono-label text-[10px] sm:text-[11px] text-[#3B82F6]">
               {project.category} // FOUNDATIONS & SCHEMA MODELING
             </div>
             <h3 className="text-xl sm:text-2xl font-semibold text-[#F5F5F5] tracking-tight">
@@ -59,7 +59,7 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
           <a
             href={project.repository}
             target="_blank"
@@ -92,10 +92,10 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
 
           <div className="p-3 bg-[#111111] border border-white/[0.06] rounded text-xs font-mono text-[#71717A] space-y-1.5">
             <div className="text-white font-medium flex items-center gap-2">
-              <Terminal className="w-3.5 h-3.5 text-[#3B82F6]" />
+              <Terminal className="w-3.5 h-3.5 text-[#3B82F6] flex-shrink-0" />
               <span>Architectural Layers</span>
             </div>
-            <div className="text-[11px] leading-relaxed">
+            <div className="text-[10px] sm:text-[11px] leading-relaxed">
               Client → FastAPI Routing → Pydantic Request Validation → SQLAlchemy ORM Layer → SQLite/MySQL Database Engine.
             </div>
           </div>
@@ -104,7 +104,7 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2 py-0.5 rounded bg-[#141414] text-[#A1A1AA] text-[11px] font-mono border border-white/[0.06]"
+                className="px-2 py-0.5 rounded bg-[#141414] text-[#A1A1AA] text-[10px] sm:text-[11px] font-mono border border-white/[0.06]"
               >
                 {tag}
               </span>
@@ -113,20 +113,20 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
         </div>
 
         {/* Live Interactive API Explorer */}
-        <div className="lg:col-span-7 border border-white/[0.08] bg-[#0A0A0A] rounded p-4 space-y-4 font-mono text-xs">
+        <div className="lg:col-span-7 border border-white/[0.08] bg-[#0A0A0A] rounded p-3.5 sm:p-4 space-y-4 font-mono text-xs">
           
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/[0.06] pb-3">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/[0.06] pb-3">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#3B82F6]" />
-              <span className="mono-label text-xs text-[#F5F5F5]">FASTAPI INTERACTIVE API EXPLORER</span>
+              <span className="w-2 h-2 rounded-full bg-[#3B82F6] flex-shrink-0" />
+              <span className="mono-label text-[11px] sm:text-xs text-[#F5F5F5]">FASTAPI API EXPLORER</span>
             </div>
-            <span className="text-[10px] text-[#71717A] bg-[#141414] px-2 py-0.5 rounded border border-white/[0.06]">
-              [MOCK REQUEST — FRONTEND EVALUATION SANDBOX]
+            <span className="text-[9px] sm:text-[10px] text-[#71717A] bg-[#141414] px-2 py-0.5 rounded border border-white/[0.06] self-start sm:self-auto">
+              [MOCK REQUEST — EVALUATION SANDBOX]
             </span>
           </div>
 
           {/* Endpoints Selector Tabs */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-1.5">
             {API_EXPLORER_ENDPOINTS.map((ep, idx) => {
               const isSelected = selectedEndpointIndex === idx;
               return (
@@ -141,7 +141,7 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
                 >
                   <div className="flex items-center gap-1.5 text-[10px]">
                     <span
-                      className={`font-bold px-1 rounded ${
+                      className={`font-bold px-1 rounded flex-shrink-0 ${
                         ep.method === 'GET'
                           ? 'bg-[#10B981]/20 text-[#10B981]'
                           : ep.method === 'POST'
@@ -159,15 +159,15 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
           </div>
 
           {/* Request Header Bar */}
-          <div className="p-2.5 bg-[#121212] rounded border border-white/[0.06] flex items-center justify-between gap-3">
+          <div className="p-2 sm:p-2.5 bg-[#121212] rounded border border-white/[0.06] flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
             <div className="flex items-center gap-2 truncate">
-              <span className="text-white font-bold text-[11px]">{currentEp.method}</span>
-              <span className="text-[#A1A1AA] truncate text-[11px]">{currentEp.path}</span>
+              <span className="text-white font-bold text-[10px] sm:text-[11px]">{currentEp.method}</span>
+              <span className="text-[#A1A1AA] truncate text-[10px] sm:text-[11px]">{currentEp.path}</span>
             </div>
             <button
               onClick={handleSendRequest}
               disabled={isExecuting}
-              className="px-3 py-1 bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded text-[11px] flex items-center gap-1.5 transition-colors"
+              className="px-3 py-1.5 bg-[#3B82F6] hover:bg-[#2563EB] text-white rounded text-[11px] flex items-center justify-center gap-1.5 transition-colors self-end sm:self-auto"
             >
               {isExecuting ? (
                 <span>Executing...</span>
@@ -183,7 +183,7 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
           {/* Payload Editor if method is POST or PUT */}
           {currentEp.defaultPayload && (
             <div className="space-y-1">
-              <div className="text-[10px] text-[#71717A] flex justify-between">
+              <div className="text-[9px] sm:text-[10px] text-[#71717A] flex flex-wrap justify-between gap-1">
                 <span>REQUEST BODY (JSON):</span>
                 <span>Content-Type: application/json</span>
               </div>
@@ -191,7 +191,7 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
                 value={customPayload}
                 onChange={(e) => setCustomPayload(e.target.value)}
                 rows={3}
-                className="w-full bg-[#111111] border border-white/[0.06] rounded p-2.5 text-[11px] text-[#D4D4D8] focus:outline-none focus:border-[#3B82F6] font-mono resize-none"
+                className="w-full bg-[#111111] border border-white/[0.06] rounded p-2.5 text-[10px] sm:text-[11px] text-[#D4D4D8] focus:outline-none focus:border-[#3B82F6] font-mono resize-none"
                 aria-label="Request Payload Body"
               />
             </div>
@@ -199,7 +199,7 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
 
           {/* Response Inspector */}
           <div className="space-y-1">
-            <div className="flex items-center justify-between text-[10px] text-[#71717A]">
+            <div className="flex flex-wrap items-center justify-between gap-1 text-[9px] sm:text-[10px] text-[#71717A]">
               <span>RESPONSE PAYLOAD</span>
               <div className="flex items-center gap-2">
                 <span className="text-[#10B981] font-semibold">
@@ -208,7 +208,7 @@ export const AppointmentAPIShowcase: React.FC<AppointmentAPIShowcaseProps> = ({
                 <span>· 12ms</span>
               </div>
             </div>
-            <pre className="bg-[#111111] p-3 rounded text-[11px] text-[#D4D4D8] overflow-x-auto border border-white/[0.04] max-h-48">
+            <pre className="bg-[#111111] p-2.5 sm:p-3 rounded text-[10px] sm:text-[11px] text-[#D4D4D8] overflow-x-auto border border-white/[0.04] max-h-48">
               {JSON.stringify(activeResponse.data, null, 2)}
             </pre>
           </div>
